@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Un mes juntos 🌷</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-top:#ffe9f1;
+    --bg-mid:#ffd7e6;
+    --bg-bottom:#ffc7dc;
+    --pink-deep:#e8567f;
+    --pink-mid:#ffb3c9;
+    --tulip-red:#ff5c7a;
+    --tulip-pink:#ffa6c1;
+    --tulip-purple:#c98bd6;
+    --tulip-cream:#ffe1a8;
+    --stem-green:#5fa777;
+    --cream:#fffaf9;
+    --text-dark:#7a3b52;
+    --gold:#f2b64f;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    height:100%;
+    overflow:hidden;
+    background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 55%, var(--bg-bottom) 100%);
+    font-family:'Quicksand', system-ui, sans-serif;
+  }
+
+  .stage{
+    position:relative;
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* soft floating hearts + sparkles */
+  .heart{
+    position:absolute;
+    bottom:-40px;
+    opacity:0.85;
+    animation: floatUp linear infinite;
+    user-select:none;
+    pointer-events:none;
+  }
+  @keyframes floatUp{
+    0%{ transform: translateY(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.85; }
+    88%{ opacity:0.55; }
+    100%{ transform: translateY(-112vh) rotate(30deg); opacity:0; }
+  }
+
+  .sparkle{
+    position:absolute;
+    color: var(--gold);
+    opacity:0;
+    animation: twinkle 2.6s ease-in-out infinite;
+    pointer-events:none;
+    user-select:none;
+  }
+  @keyframes twinkle{
+    0%,100%{ opacity:0; transform: scale(0.6) rotate(0deg); }
+    50%{ opacity:0.9; transform: scale(1.05) rotate(20deg); }
+  }
+
+  /* card */
+  .card{
+    position:relative;
+    z-index:5;
+    width:min(92vw, 440px);
+    background: var(--cream);
+    border-radius: 30px;
+    padding: 40px 30px 30px;
+    text-align:center;
+    box-shadow: 0 24px 60px rgba(200,80,120,0.28), 0 2px 0 rgba(255,255,255,0.6) inset;
+    opacity:0;
+    transform: translateY(30px) scale(0.96);
+    animation: cardIn 1s ease-out 0.4s forwards;
+    border: 2px solid #ffe0ea;
+  }
+  @keyframes cardIn{
+    to{ opacity:1; transform: translateY(0) scale(1); }
+  }
+
+  .kitty{
+    width:126px;
+    margin: -84px auto 4px;
+    display:block;
+    filter: drop-shadow(0 10px 12px rgba(200,80,120,0.28));
+    animation: bob 3.2s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0) rotate(-2deg); }
+    50%{ transform: translateY(-8px) rotate(2deg); }
+  }
+
+  h1{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size: clamp(30px, 8vw, 40px);
+    color: var(--pink-deep);
+    margin: 6px 0 0;
+    letter-spacing: 0.3px;
+  }
+
+  .sub{
+    color: var(--text-dark);
+    font-size: 14.5px;
+    margin: 4px 0 18px;
+    line-height:1.5;
+    font-weight:600;
+  }
+
+  /* tulip garden */
+  .garden{
+    position:relative;
+    height: 148px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    gap: 5px;
+    margin-bottom: 4px;
+  }
+
+  .tulip{
+    position:relative;
+    width: 42px;
+    height: 0;
+    transform-origin:bottom center;
+    animation: grow 1.1s cubic-bezier(.25,1.4,.4,1) forwards;
+  }
+  .tulip:nth-child(1){ animation-delay: 1.0s; }
+  .tulip:nth-child(2){ animation-delay: 1.2s; }
+  .tulip:nth-child(3){ animation-delay: 1.4s; }
+  .tulip:nth-child(4){ animation-delay: 1.6s; }
+  .tulip:nth-child(5){ animation-delay: 1.8s; }
+  .tulip:nth-child(6){ animation-delay: 2.0s; }
+  .tulip:nth-child(7){ animation-delay: 2.2s; }
+
+  @keyframes grow{
+    from{ height:0; opacity:0; }
+    to{ height: 128px; opacity:1; }
+  }
+
+  .tulip svg{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform: translateX(-50%);
+    width:42px;
+    height:128px;
+    overflow:visible;
+    animation: sway 4s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+  .tulip:nth-child(even) svg{ animation-delay: 0.4s; }
+  .tulip:nth-child(3n) svg{ animation-delay: 0.8s; }
+
+  @keyframes sway{
+    0%,100%{ transform: translateX(-50%) rotate(-3deg); }
+    50%{ transform: translateX(-50%) rotate(3deg); }
+  }
+
+  .counter{
+    margin-top: 12px;
+    display:inline-flex;
+    align-items:baseline;
+    gap:8px;
+    background: linear-gradient(135deg, #fff0f4, #ffe1ea);
+    border: 1px solid #ffd0dd;
+    border-radius: 999px;
+    padding: 8px 22px;
+    opacity:0;
+    animation: fadeIn 0.8s ease forwards 2.8s;
+  }
+  @keyframes fadeIn{ to{ opacity:1; } }
+
+  .counter .num{
+    font-size: 27px;
+    font-weight:700;
+    color: var(--tulip-red);
+  }
+  .counter .label{
+    font-size: 13px;
+    color: var(--text-dark);
+    font-weight:600;
+  }
+
+  /* rotating messages */
+  .messages{
+    position:relative;
+    margin-top: 18px;
+    height: 54px;
+    opacity:0;
+    animation: fadeIn 0.8s ease forwards 3.2s;
+  }
+  .msg{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 0 4px;
+    font-size: 15px;
+    color: var(--pink-deep);
+    font-weight:600;
+    line-height:1.4;
+    opacity:0;
+    transform: translateY(6px);
+    animation: msgCycle 16s infinite;
+  }
+  .msg:nth-child(1){ animation-delay: 0s; }
+  .msg:nth-child(2){ animation-delay: 4s; }
+  .msg:nth-child(3){ animation-delay: 8s; }
+  .msg:nth-child(4){ animation-delay: 12s; }
+
+  @keyframes msgCycle{
+    0%{ opacity:0; transform: translateY(6px); }
+    4%{ opacity:1; transform: translateY(0); }
+    22%{ opacity:1; transform: translateY(0); }
+    27%{ opacity:0; transform: translateY(-6px); }
+    100%{ opacity:0; }
+  }
+
+  .dots{
+    margin-top:6px;
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    opacity:0;
+    animation: fadeIn 0.8s ease forwards 3.2s;
+  }
+  .dot{
+    width:6px; height:6px; border-radius:50%;
+    background: var(--pink-mid);
+    animation: dotPulse 16s infinite;
+  }
+  .dot:nth-child(1){ animation-delay:0s; }
+  .dot:nth-child(2){ animation-delay:4s; }
+  .dot:nth-child(3){ animation-delay:8s; }
+  .dot:nth-child(4){ animation-delay:12s; }
+  @keyframes dotPulse{
+    0%{ background: var(--pink-mid); transform:scale(1); }
+    4%{ background: var(--pink-deep); transform:scale(1.3); }
+    22%{ background: var(--pink-deep); transform:scale(1.3); }
+    27%{ background: var(--pink-mid); transform:scale(1); }
+    100%{ background: var(--pink-mid); transform:scale(1); }
+  }
+
+  .footer-note{
+    margin-top:16px;
+    font-size: 12.5px;
+    color: #b57187;
+    opacity:0;
+    font-weight:600;
+    animation: fadeIn 0.8s ease forwards 3.4s;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+  <div class="card">
+    <!-- cute kawaii cat, original design (not the Sanrio character) -->
+    <svg class="kitty" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 30 L8 6 L34 24 Z" fill="#ffffff" stroke="#f3b6c9" stroke-width="2"/>
+      <path d="M82 30 L92 6 L66 24 Z" fill="#ffffff" stroke="#f3b6c9" stroke-width="2"/>
+      <ellipse cx="50" cy="46" rx="34" ry="30" fill="#ffffff" stroke="#f3b6c9" stroke-width="2"/>
+      <g transform="translate(66,20)">
+        <polygon points="0,0 14,-8 14,8" fill="#ff6f9c"/>
+        <polygon points="0,0 -14,-8 -14,8" fill="#ff88ac"/>
+        <circle cx="0" cy="0" r="4" fill="#ff4f80"/>
+      </g>
+      <ellipse cx="36" cy="46" rx="2.6" ry="3.4" fill="#7a3b52"/>
+      <ellipse cx="64" cy="46" rx="2.6" ry="3.4" fill="#7a3b52"/>
+      <line x1="6" y1="48" x2="26" y2="46" stroke="#f0a8c0" stroke-width="1.5"/>
+      <line x1="6" y1="54" x2="26" y2="53" stroke="#f0a8c0" stroke-width="1.5"/>
+      <line x1="94" y1="48" x2="74" y2="46" stroke="#f0a8c0" stroke-width="1.5"/>
+      <line x1="94" y1="54" x2="74" y2="53" stroke="#f0a8c0" stroke-width="1.5"/>
+      <ellipse cx="50" cy="52" rx="3" ry="2.2" fill="#ffb0c4"/>
+    </svg>
+
+    <h1>Un mes contigo</h1>
+    <p class="sub">Un jardín pequeño para celebrar<br>nuestro primer mes juntos 🌷</p>
+
+    <div class="garden" id="garden"></div>
+
+    <div class="counter">
+      <span class="num">1</span>
+      <span class="label">mes juntos</span>
+    </div>
+
+    <div class="messages">
+      <div class="msg">Contigo hasta lo simple se vuelve mi momento favorito del día 🌸</div>
+      <div class="msg">Un mes queriéndote y sintiendo que apenas empezamos 💗</div>
+      <div class="msg">Gracias por cada risa, cada mensaje y cada "buenos días" 🐾</div>
+      <div class="msg">Que este sea el primero de muchos meses juntos 🌷</div>
+    </div>
+    <div class="dots">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+
+    <p class="footer-note">gracias por este primer mes tan bonito 🐾💕</p>
+  </div>
+
+</div>
+
+<script>
+  const stage = document.getElementById('stage');
+  const heartsChars = ['💗','💕','🌷','💖'];
+  for(let i=0;i<16;i++){
+    const h = document.createElement('div');
+    h.className='heart';
+    h.textContent = heartsChars[Math.floor(Math.random()*heartsChars.length)];
+    h.style.left = Math.random()*100+'%';
+    h.style.fontSize = (14+Math.random()*16)+'px';
+    h.style.animationDuration = (6+Math.random()*6)+'s';
+    h.style.animationDelay = (Math.random()*6)+'s';
+    stage.appendChild(h);
+  }
+  const sparkleChars = ['✦','✧','⋆'];
+  for(let i=0;i<10;i++){
+    const s = document.createElement('div');
+    s.className='sparkle';
+    s.textContent = sparkleChars[Math.floor(Math.random()*sparkleChars.length)];
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.fontSize = (12+Math.random()*14)+'px';
+    s.style.animationDuration = (2+Math.random()*2.5)+'s';
+    s.style.animationDelay = (Math.random()*3)+'s';
+    stage.appendChild(s);
+  }
+
+  // build 7 tulips with alternating colors
+  const garden = document.getElementById('garden');
+  const colors = [
+    ['#ff5c7a','#ff8aa0'],
+    ['#c98bd6','#dfb1e6'],
+    ['#ffa6c1','#ffd0dd'],
+    ['#f2b64f','#ffe1a8'],
+    ['#ff5c7a','#ff8aa0'],
+    ['#c98bd6','#dfb1e6'],
+    ['#ffa6c1','#ffd0dd']
+  ];
+  const heights = [78,70,86,74,82,68,90];
+  const curls = [1,-1,1,-1,1,-1,1];
+  colors.forEach((c, i) => {
+    const h = heights[i];
+    const dir = curls[i];
+    const div = document.createElement('div');
+    div.className='tulip';
+    div.innerHTML = `<svg viewBox="0 0 42 130"><g transform="translate(21,130)">
+      <path d="M0 0 L0 ${-h}" stroke="#5fa777" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M0 ${-h*0.5} Q${dir*14} ${-h*0.58} ${dir*10} ${-h*0.74}" stroke="#5fa777" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <g transform="translate(0,${-h-4})">
+        <path d="M0 0 C-11 -6 -12 -26 0 -32 C12 -26 11 -6 0 0Z" fill="${c[0]}"/>
+        <path d="M0 -2 C-6 -6 -6 -20 0 -26 C6 -20 6 -6 0 -2Z" fill="${c[1]}"/>
+      </g>
+    </g></svg>`;
+    garden.appendChild(div);
+  });
+</script>
+
+</body>
+</html>
